@@ -8,10 +8,16 @@ from firebase_admin import credentials, firestore
 import google.generativeai as genai
 import traceback  # 放在檔案最上方
 from datetime import datetime
-
+import json
+from firebase_admin import credentials, initialize_app
 # ✅ 初始化 Firebase
-cred = credentials.Certificate(r"D:\google_apac\google_apac_v4\google_apac\appv3\apac-2025-yuntech-firebase-adminsdk-fbsvc-ed07403664.json")
-firebase_admin.initialize_app(cred)
+firebase_json = os.environ.get("FIREBASE_CREDENTIALS_JSON")
+if not firebase_json:
+    raise ValueError("未設定 FIREBASE_CREDENTIALS_JSON 環境變數")
+
+cred_dict = json.loads(firebase_json)
+cred = credentials.Certificate(cred_dict)
+initialize_app(cred)
 db = firestore.client()
 
 # ✅ 初始化 Flask
