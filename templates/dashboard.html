@@ -1,0 +1,241 @@
+<!-- ✅ 完整的單一頁面：dashboard.html -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <title>海廢辨識圖鑑系統</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #f0f8ff;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            margin: 10px 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card {
+            width: 160px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>🌊 海廢辨識系統</h2>
+        <div>
+            <span id="welcomeMsg">歡迎！</span>
+            <a href="/logout"><button>登出</button></a>
+        </div>
+    </header>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="imageInput" accept="image/*" required>
+        <button type="submit">上傳並辨識</button>
+    </form>
+
+    <h3>📅 可參加的活動</h3>
+    <div id="eventList" class="grid"></div>
+    
+
+    <h3>✅ 我已參加的活動</h3>
+    <div id="joinedList" class="grid"></div>
+
+
+    <div id="preview"></div>
+    <div id="result"></div>
+    <h3>📖 我的圖鑑</h3>
+    <div id="dexList" class="grid"></div>
+
+    <script>
+        const USERNAME = "{{ username }}";
+        const USER_ID = "{{ user_id }}";
+        document.getElementById("welcomeMsg").innerText = `歡迎，${USERNAME}！`;
+
+        const unlocked = new Set();
+        const DEX = {
+            "001": { name: "寶特瓶", image: "/static/dex/001.png" },
+            "002": { name: "寶特瓶瓶蓋", image: "/static/dex/002.png" },
+            "003": { name: "鐵鋁罐", image: "/static/dex/003.png" },
+            "004": { name: "鋁箔容器", image: "/static/dex/004.png" },
+            "005": { name: "紙張", image: "/static/dex/005.png" },
+            "006": { name: "紙箱", image: "/static/dex/006.png" },
+            "007": { name: "紙餐盒", image: "/static/dex/007.png" },
+            "008": { name: "香菸盒", image: "/static/dex/008.png" },
+            "009": { name: "塑膠湯匙", image: "/static/dex/009.png" },
+            "010": { name: "塑膠叉子", image: "/static/dex/010.png" },
+            "011": { name: "免洗杯", image: "/static/dex/011.png" },
+            "012": { name: "塑膠手搖飲料杯", image: "/static/dex/012.png" },
+            "013": { name: "保麗龍飲料杯", image: "/static/dex/013.png" },
+            "014": { name: "塑膠袋", image: "/static/dex/014.png" },
+            "015": { name: "塑膠吸管", image: "/static/dex/015.png" },
+            "016": { name: "保麗龍塊", image: "/static/dex/016.png" },
+            "017": { name: "漁網", image: "/static/dex/017.png" },
+            "018": { name: "浮標", image: "/static/dex/018.png" },
+            "019": { name: "浮球", image: "/static/dex/019.png" },
+            "020": { name: "打火機", image: "/static/dex/020.png" },
+            "021": { name: "棉花棒", image: "/static/dex/021.png" },
+            "022": { name: "菸蒂", image: "/static/dex/022.png" },
+            "023": { name: "夾腳拖", image: "/static/dex/023.png" },
+            "024": { name: "玻璃罐", image: "/static/dex/024.png" },
+            "025": { name: "玻璃碎片", image: "/static/dex/025.png" }
+        };
+
+        async function fetchUnlocked() {
+            const res = await fetch("/get_unlocked");
+            const data = await res.json();
+            for (const id of data.unlocked_ids) {
+                unlocked.add(id);
+            }
+            renderDex();
+        }
+        
+
+        async function fetchEvents() {
+            const res = await fetch("/get_events");
+            const data = await res.json();
+            const eventList = document.getElementById("eventList");
+            eventList.innerHTML = '';
+
+            for (const event of data.events) {
+                eventList.innerHTML += `
+                <div class="card">
+                    <h4>${event.title}</h4>
+                    <p>${event.location}</p>
+                    <p>${new Date(event.datetime).toLocaleString()}</p>
+                    <button onclick="joinEvent('${event.id}')">參加</button>
+                </div>`;
+            }
+        }
+
+        async function joinEvent(eventId) {
+            const res = await fetch(`/join_event/${eventId}`, {
+                method: "POST"
+            });
+            const text = await res.text();
+            alert("已送出參加請求");
+        }
+
+        fetchEvents();
+
+        async function fetchJoinedEvents() {
+            const res = await fetch("/get_joined_events");
+            const data = await res.json();
+            const joinedList = document.getElementById("joinedList");
+            joinedList.innerHTML = '';
+
+            for (const event of data.events) {
+                joinedList.innerHTML += `
+                <div class="card">
+                    <h4>${event.title}</h4>
+                    <p>${event.location}</p>
+                    <p>${new Date(event.datetime).toLocaleString()}</p>
+                </div>`;
+            }
+        }
+
+        fetchJoinedEvents();
+        
+
+        function renderDex() {
+            const dexList = document.getElementById("dexList");
+            dexList.innerHTML = '';
+            for (let id in DEX) {
+                const item = DEX[id];
+                const imgSrc = unlocked.has(id) ? item.image : "/static/dex/unknow.png";
+                dexList.innerHTML += `
+          <div class="card">
+            <img src="${imgSrc}" alt="圖鑑">
+            <p>${item.name}</p>
+            <p>#${id}</p>
+          </div>`;
+            }
+        }
+
+        document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const file = document.getElementById("imageInput").files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                document.getElementById("preview").innerHTML = `<img src="${reader.result}" alt="preview">`;
+            };
+            reader.readAsDataURL(file);
+
+            const formData = new FormData();
+            formData.append("image", file);
+
+            const res = await fetch("/analyze_trash", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await res.json();
+            const result = document.getElementById("result");
+
+            if (data.unlocked_id) {
+                unlocked.add(data.unlocked_id);
+                result.innerHTML = `
+          <h3>🔍 辨識結果：${data.unlocked_name}</h3>
+          <img src="${data.unlocked_image}" alt="圖鑑圖片">
+          <p>圖鑑編號：${data.unlocked_id}</p>
+        `;
+            } else {
+                result.innerHTML = `<h3>❌ 無法辨識</h3>`;
+            }
+
+            renderDex();
+        });
+
+        fetchUnlocked();
+    </script>
+</body>
+
+</html>

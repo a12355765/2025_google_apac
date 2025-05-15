@@ -1,0 +1,10 @@
+<form method="POST">
+    <input type="text" name="username" placeholder="帳號" required>
+    <input type="password" name="password" placeholder="密碼" required>
+    <select name="role" required>
+      <option value="user">一般使用者</option>
+      <option value="organizer">主辦方</option>
+    </select>
+    <button type="submit">註冊</button>
+  </form>
+  <a href="{{ url_for('login') }}" class="btn btn-secondary mt-2">返回登入</a>

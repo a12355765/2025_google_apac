@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>主辦方後台</title>
+</head>
+<body>
+    <h2>歡迎主辦方：{{ username }}</h2>
+    <h3>建立新活動</h3>
+    <form method="POST" action="{{ url_for('create_event') }}">
+        <label>活動名稱：</label><input type="text" name="title"><br>
+        <label>說明：</label><textarea name="description"></textarea><br>
+        <label>地點：</label><input type="text" name="location"><br>
+        <label>時間：</label><input type="datetime-local" name="datetime"><br>
+        <label>選單項目（用逗號分隔）：</label><input type="text" name="menu"><br>
+        <button type="submit">建立活動</button>
+    </form>
+
+    <h3>你已建立的活動</h3>
+    <ul>
+    {% for event in events %}
+        <li>
+            <strong>{{ event.title }}</strong> - {{ event.datetime }} @ {{ event.location }}<br>
+            <em>參加者：</em>
+            {% if event.participants %}
+                <ul>
+                {% for user in event.participants %}
+                    <li>{{ user }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                無人參加
+            {% endif %}
+        </li>
+
+    {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('logout') }}">登出</a>
+</body>
+</html>

@@ -1,0 +1,6 @@
+Flask
+flask-login
+firebase-admin
+google-generativeai
+Werkzeug
+gunicorn
