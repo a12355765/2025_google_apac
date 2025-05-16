@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #a0d3db, #d2edf0);
+    color: #003c3c;
+}
+
+header {
+    background-color: transparent;
+    padding: 24px 30px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 10 10 10px;
+    font-size: 2rem;
+    color: #007c91;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: auto;
+    max-width: 1000px;
+}
+
+nav button,
+nav a button {
+    flex: 1 1 18%;
+    min-width: 120px;
+    padding: 14px 16px;
+    border: none;
+    border-radius: 16px;
+    background-color: #008fa1;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+nav button.logout {
+    flex: 0 0 10%;
+    background-color: #00675b;
+}
+
+nav button:hover,
+nav a button:hover {
+    background-color: #006f87;
+    transform: scale(1.04);
+}
+
+main {
+    padding: 30px 20px 60px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+section.view {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+section.view:first-of-type {
+    display: block;
+}
+
+form {
+    background: rgb(233, 252, 255);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+input[type="file"] {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #0a4e5c;
+    width: 95%;
+    margin-bottom: 20px;
+}
+
+button[type="submit"] {
+    padding: 12px 20px;
+    background-color: rgb(33, 119, 131);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #007c91;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+    justify-content: center;
+}
+
+.card {
+    background: rgb(255, 255, 255);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    padding: 16px;
+    width: 180px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    opacity: 1;
+}
+
+.card.locked {
+    opacity: 0.4;
+    filter: grayscale(1);
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card img {
+    max-width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

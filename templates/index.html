@@ -1,7 +1,25 @@
-<h2>登入</h2>
-<form action="/login" method="post">
-    <input type="text" name="username" placeholder="使用者名稱" required><br>
-    <input type="password" name="password" placeholder="密碼" required><br>
-    <button type="submit">登入</button>
-</form>
-<a href="/register">還沒有帳號？註冊</a>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Recycle Wingman</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Login to Recycle Wingman</h2>
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <a href="/register">Don’t have an account? Register here</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='login.js') }}"></script>
+
+</body>
+
+</html>

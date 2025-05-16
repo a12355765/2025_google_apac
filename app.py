@@ -11,13 +11,17 @@ from datetime import datetime
 import json
 from firebase_admin import credentials, initialize_app
 # ✅ 初始化 Firebase
+'''
 firebase_json = os.environ.get("FIREBASE_CREDENTIALS_JSON")
 if not firebase_json:
     raise ValueError("未設定 FIREBASE_CREDENTIALS_JSON 環境變數")
 
-cred_dict = json.loads(firebase_json)
+cred_dict = json.loads(firebase_json)s
 cred = credentials.Certificate(cred_dict)
 initialize_app(cred)
+'''
+cred = credentials.Certificate(r"D:\google_apac\v5_test\flask-backend\apac-2025-yuntech-firebase-adminsdk-fbsvc-ed07403664.json")
+firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # ✅ 初始化 Flask
@@ -63,7 +67,8 @@ def register():
         db.collection("users").document().set({
             "username": username,
             "password": password,
-            "role": role
+            "role": role,
+            "tokens": 0
         })
         flash("註冊成功，請登入", "success")
         return redirect(url_for('index'))
@@ -166,13 +171,25 @@ def join_event(event_id):
         return redirect(url_for('organizer_dashboard'))
 
     try:
-        # 建立在 events/{event_id}/participants 子集合中加入 user_id
-        db.collection('events').document(event_id).collection('participants').document(current_user.id).set({
-            'user_id': current_user.id,
-            'joined_at': firestore.SERVER_TIMESTAMP
-        })
+        event_doc = db.collection('events').document(event_id)
+        participants_ref = event_doc.collection('participants').document(current_user.id)
 
-        flash("成功參加活動", "success")
+        if not participants_ref.get().exists:
+            participants_ref.set({
+                'user_id': current_user.id,
+                'joined_at': firestore.SERVER_TIMESTAMP
+            })
+
+            user_ref = db.collection("users").document(current_user.id)
+            doc = user_ref.get()
+            if doc.exists:
+                current_tokens = doc.to_dict().get("tokens", 0)
+                user_ref.set({"tokens": current_tokens + 1}, merge=True)
+
+            flash("成功參加活動並獲得 1 代幣！", "success")
+        else:
+            flash("您已參加過此活動", "info")
+
     except Exception as e:
         traceback.print_exc()
         flash("參加活動失敗", "danger")
@@ -231,10 +248,10 @@ def create_event():
             'datetime': datetime.fromisoformat(datetime_str),
             'menu': [item.strip() for item in menu_str.split(',')]
         })
-        flash("活動建立成功", "success")
+        flash("OK", "success")
     except Exception as e:
         traceback.print_exc()
-        flash("建立活動失敗", "danger")
+        flash("fail", "danger")
 
     return redirect(url_for('organizer_dashboard'))
 
@@ -250,15 +267,13 @@ def create_event():
 
 """
 
-# ✅ 登出
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    flash("您已成功登出", "info")
+    flash("logout OK", "info")
     return redirect(url_for('index'))
 
-# ✅ 圖鑑查詢 API
 @app.route("/get_unlocked", methods=["GET"])
 @login_required
 def get_unlocked():
@@ -269,112 +284,117 @@ def get_unlocked():
         return jsonify({"unlocked_ids": unlocked})
     return jsonify({"unlocked_ids": []})
 
-# ✅ 海廢辨識 API
+import re
+import traceback
+from flask import request, jsonify
+from flask_login import login_required, current_user
+
 @app.route("/analyze_trash", methods=["POST"])
 @login_required
 def analyze_trash():
     file = request.files.get("image")
     if not file:
-        return jsonify({"error": "未提供圖片"}), 400
+        return jsonify({"error": "No file uploaded"}), 400
 
     image_bytes = file.read()
 
     prompt = """
-請從以下海洋廢棄物分類中選擇圖片中最接近的項目，並依照格式回覆：
-【分類】：分類名稱（如下所列）
-【說明】：簡要說明該廢棄物的常見來源、材質與對環境的影響（約2～3行）。
-分類清單：
-1. 寶特瓶
-2. 寶特瓶瓶蓋
-3. 鐵鋁罐
-4. 鋁箔容器
-5. 紙張
-6. 紙箱
-7. 紙餐盒
-8. 香菸盒
-9. 塑膠湯匙
-10. 塑膠叉子
-11. 免洗杯
-12. 塑膠手搖飲料飲料杯
-13. 保麗龍手搖飲料飲料杯
-14. 塑膠袋
-15. 塑膠吸管
-16. 保麗龍塊
-17. 漁網
-18. 浮標
-19. 浮球
-20. 打火機
-21. 棉花棒
-22. 菸蒂
-23. 夾腳拖
-24. 玻璃罐
-25. 玻璃碎片
-請根據照片內容，選出最符合的分類，並提供簡短說明，不需要其他多餘文字。
+Please select the category that best matches the object in the image from the list of marine debris types below, and reply in the following format:
+【Category】: Name of the category (as listed below)
+【Description】: A brief explanation of the item’s common sources, materials, and its environmental impact (about 2–3 lines).
 
+Category List:
+1. PET Bottle  
+2. Bottle Cap  
+3. Aluminum Can  
+4. Foil Container  
+5. Paper  
+6. Cardboard Box  
+7. Paper Lunchbox  
+8. Cigarette Box  
+9. Plastic Spoon  
+10. Plastic Fork  
+11. Disposable Cup  
+12. Plastic Drink Cup  
+13. Foam Drink Cup  
+14. Plastic Bag  
+15. Plastic Straw  
+16. Foam Piece  
+17. Fishing Net  
+18. Buoy  
+19. Float Ball  
+20. Lighter  
+21. Cotton Swab  
+22. Cigarette Butt  
+23. Flip-flop  
+24. Glass Bottle  
+25. Glass Shard  
 """
+
     try:
         response = model.generate_content([
             {"text": prompt},
             {"mime_type": file.mimetype, "data": image_bytes}
         ])
     except Exception as e:
-        print("❌ Gemini generate_content 發生錯誤：")
+        print("❌ Gemini API Error:")
         traceback.print_exc()
-        return jsonify({"error": "Gemini API 發生錯誤，請稍後再試"}), 500
+        return jsonify({"error": "Gemini API error"}), 500
 
     try:
         response_text = response.text.strip()
-        print("✅ Gemini 回傳內容：", response_text)
-
-        match = re.search(r"(?:【分類】：|分類[:：]?)\s*(\S+)", response_text)
+        print("✅ Gemini response:", response_text)
+        match = re.search(r"【Category】[:：]?\s*(\d+\.\s*)?(.*)", response_text)
         if not match:
-            print("⚠️ 無法擷取分類")
-            return jsonify({"detected": "無法辨識"})
+            print("❌ Unable to extract category")
+            return jsonify({"detected": "error"})
 
-        category = match.group(1).strip()
-        print("✅ 擷取分類：", category)
-
+        category = match.group(2).strip()
         TRASH_DEX = {
-            "寶特瓶": {"id": "001", "image": "/static/dex/001.png"},
-            "寶特瓶瓶蓋": {"id": "002", "image": "/static/dex/002.png"},
-            "鐵鋁罐": {"id": "003", "image": "/static/dex/003.png"},
-            "鋁箔容器": {"id": "004", "image": "/static/dex/004.png"},
-            "紙張": {"id": "005", "image": "/static/dex/005.png"},
-            "紙箱": {"id": "006", "image": "/static/dex/006.png"},
-            "紙餐盒": {"id": "007", "image": "/static/dex/007.png"},
-            "香菸盒": {"id": "008", "image": "/static/dex/008.png"},
-            "塑膠湯匙": {"id": "009", "image": "/static/dex/009.png"},
-            "塑膠叉子": {"id": "010", "image": "/static/dex/010.png"},
-            "免洗杯": {"id": "011", "image": "/static/dex/011.png"},
-            "塑膠手搖飲料杯": {"id": "012", "image": "/static/dex/012.png"},
-            "保麗龍飲料杯": {"id": "013", "image": "/static/dex/013.png"},
-            "塑膠袋": {"id": "014", "image": "/static/dex/014.png"},
-            "塑膠吸管": {"id": "015", "image": "/static/dex/015.png"},
-            "保麗龍塊": {"id": "016", "image": "/static/dex/016.png"},
-            "漁網": {"id": "017", "image": "/static/dex/017.png"},
-            "浮標": {"id": "018", "image": "/static/dex/018.png"},
-            "浮球": {"id": "019", "image": "/static/dex/019.png"},
-            "打火機": {"id": "020", "image": "/static/dex/020.png"},
-            "棉花棒": {"id": "021", "image": "/static/dex/021.png"},
-            "菸蒂": {"id": "022", "image": "/static/dex/022.png"},
-            "夾腳拖": {"id": "023", "image": "/static/dex/023.png"},
-            "玻璃罐": {"id": "024", "image": "/static/dex/024.png"},
-            "玻璃碎片": {"id": "025", "image": "/static/dex/025.png"}
+            "PET Bottle": {"id": "001", "image": "/static/dex/001.png"},
+            "Bottle Cap": {"id": "002", "image": "/static/dex/002.png"},
+            "Aluminum Can": {"id": "003", "image": "/static/dex/003.png"},
+            "Foil Container": {"id": "004", "image": "/static/dex/004.png"},
+            "Paper": {"id": "005", "image": "/static/dex/005.png"},
+            "Cardboard Box": {"id": "006", "image": "/static/dex/006.png"},
+            "Paper Lunchbox": {"id": "007", "image": "/static/dex/007.png"},
+            "Cigarette Box": {"id": "008", "image": "/static/dex/008.png"},
+            "Plastic Spoon": {"id": "009", "image": "/static/dex/009.png"},
+            "Plastic Fork": {"id": "010", "image": "/static/dex/010.png"},
+            "Disposable Cup": {"id": "011", "image": "/static/dex/011.png"},
+            "Plastic Drink Cup": {"id": "012", "image": "/static/dex/012.png"},
+            "Foam Drink Cup": {"id": "013", "image": "/static/dex/013.png"},
+            "Plastic Bag": {"id": "014", "image": "/static/dex/014.png"},
+            "Plastic Straw": {"id": "015", "image": "/static/dex/015.png"},
+            "Foam Piece": {"id": "016", "image": "/static/dex/016.png"},
+            "Fishing Net": {"id": "017", "image": "/static/dex/017.png"},
+            "Buoy": {"id": "018", "image": "/static/dex/018.png"},
+            "Float Ball": {"id": "019", "image": "/static/dex/019.png"},
+            "Lighter": {"id": "020", "image": "/static/dex/020.png"},
+            "Cotton Swab": {"id": "021", "image": "/static/dex/021.png"},
+            "Cigarette Butt": {"id": "022", "image": "/static/dex/022.png"},
+            "Flip-flop": {"id": "023", "image": "/static/dex/023.png"},
+            "Glass Bottle": {"id": "024", "image": "/static/dex/024.png"},
+            "Glass Shard": {"id": "025", "image": "/static/dex/025.png"}
         }
 
         dex = TRASH_DEX.get(category)
         if not dex:
-            print("⚠️ 找不到分類對應圖鑑")
-            return jsonify({"detected": "無法辨識"})
+            print(f"❌ '{category}' not found in TRASH_DEX")
+            return jsonify({"detected": "error"})
 
-        user_id = current_user.id
-        user_ref = db.collection("users").document(user_id)
+        # 更新用戶資料
+        user_ref = db.collection("users").document(current_user.id)
         doc = user_ref.get()
         unlocked = doc.to_dict().get("unlocked_dex", []) if doc.exists else []
 
         if dex["id"] not in unlocked:
             unlocked.append(dex["id"])
-            user_ref.set({"unlocked_dex": unlocked}, merge=True)
+            current_tokens = doc.to_dict().get("tokens", 0)
+            user_ref.set({
+                "unlocked_dex": unlocked,
+                "tokens": current_tokens + 1
+            }, merge=True)
 
         return jsonify({
             "detected": category,
@@ -383,15 +403,21 @@ def analyze_trash():
             "unlocked_image": dex["image"]
         })
 
-    except Exception as e:
-        print("❌ 回傳處理發生錯誤：")
+    except Exception:
         traceback.print_exc()
-        return jsonify({"error": "回傳處理錯誤"}), 500
+        return jsonify({"error": "unexpected server error"}), 500
 
-# ✅ 首頁導向
+    
+@app.route("/get_token_count")
+@login_required
+def get_token_count():
+    doc = db.collection("users").document(current_user.id).get()
+    tokens = doc.to_dict().get("tokens", 0) if doc.exists else 0
+    return jsonify({"tokens": tokens})
 @app.route('/')
 def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(debug=True)
+    #app.run(host='0.0.0.0', port=8080)

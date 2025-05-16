@@ -1,41 +1,122 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>主辦方後台</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organizer Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom right, #a8e6ff, #d4f1f9);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 30px;
+            color: #035d75;
+            font-size: 2rem;
+        }
+
+        .form-card,
+        .event-list {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            margin: 20px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #03a9f4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0288d1;
+        }
+
+        .event-item {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .event-item h3 {
+            margin: 0 0 10px;
+        }
+    </style>
 </head>
+
 <body>
-    <h2>歡迎主辦方：{{ username }}</h2>
-    <h3>建立新活動</h3>
-    <form method="POST" action="{{ url_for('create_event') }}">
-        <label>活動名稱：</label><input type="text" name="title"><br>
-        <label>說明：</label><textarea name="description"></textarea><br>
-        <label>地點：</label><input type="text" name="location"><br>
-        <label>時間：</label><input type="datetime-local" name="datetime"><br>
-        <label>選單項目（用逗號分隔）：</label><input type="text" name="menu"><br>
-        <button type="submit">建立活動</button>
-    </form>
+    <h1>📋 Organizer Dashboard</h1>
+    <div class="form-card">
+        <form method="POST" action="/create_event">
+            <label for="title">Event Title</label>
+            <input type="text" id="title" name="title" required />
 
-    <h3>你已建立的活動</h3>
-    <ul>
-    {% for event in events %}
-        <li>
-            <strong>{{ event.title }}</strong> - {{ event.datetime }} @ {{ event.location }}<br>
-            <em>參加者：</em>
-            {% if event.participants %}
-                <ul>
-                {% for user in event.participants %}
-                    <li>{{ user }}</li>
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" required />
+
+            <label for="datetime">Date and Time</label>
+            <input type="datetime-local" id="datetime" name="datetime" required />
+
+            <button type="submit">Create Event</button>
+        </form>
+    </div>
+
+    <div class="event-list">
+        <h2>🗓️ Existing Events</h2>
+        {% for event in events %}
+        <div class="event-item">
+            <h3>{{ event.title }}</h3>
+            <p><strong>Location:</strong> {{ event.location }}</p>
+            <p><strong>Time:</strong> {{ event.datetime }}</p>
+            <p><strong>Participants:</strong> {{ event.participants | length }}</p>
+            <ul>
+                {% for p in event.participants %}
+                <li>{{ p.username }}</li>
                 {% endfor %}
-                </ul>
-            {% else %}
-                無人參加
-            {% endif %}
-        </li>
-
-    {% endfor %}
-    </ul>
-
-    <a href="{{ url_for('logout') }}">登出</a>
+            </ul>
+        </div>
+        {% else %}
+        <p>No events created yet.</p>
+        {% endfor %}
+    </div>
 </body>
+
 </html>
