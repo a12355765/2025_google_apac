@@ -1,0 +1,643 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FF80EC4A2DD48AB100875F3F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FF80EC492DD48AB100875F3F /* FirebaseAuth */; };
+		FF80EC4C2DD48AB100875F3F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = FF80EC4B2DD48AB100875F3F /* FirebaseDatabase */; };
+		FF80EC4E2DD48AB100875F3F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FF80EC4D2DD48AB100875F3F /* FirebaseFirestore */; };
+		FF80EC502DD48AB100875F3F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FF80EC4F2DD48AB100875F3F /* FirebaseStorage */; };
+		FF80EC572DD49ACD00875F3F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FF80EC562DD49ACD00875F3F /* FirebaseAnalytics */; };
+		FF80EC592DD5B7FA00875F3F /* test.txt in Sources */ = {isa = PBXBuildFile; fileRef = FF80EC582DD5B7F200875F3F /* test.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FF9F13FD2DC8F67700A58920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF9F13E42DC8F63D00A58920 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF9F13EB2DC8F63D00A58920;
+			remoteInfo = google_marine_waste;
+		};
+		FF9F14072DC8F67700A58920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF9F13E42DC8F63D00A58920 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF9F13EB2DC8F63D00A58920;
+			remoteInfo = google_marine_waste;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FF80EC582DD5B7F200875F3F /* test.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
+		FF9F13EC2DC8F63D00A58920 /* google_marine_waste.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = google_marine_waste.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF9F13FC2DC8F67700A58920 /* google_marine_wasteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = google_marine_wasteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF9F14062DC8F67700A58920 /* google_marine_wasteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = google_marine_wasteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		FF9F13EE2DC8F63D00A58920 /* google_marine_waste */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = google_marine_waste;
+			sourceTree = "<group>";
+		};
+		FF9F13FF2DC8F67700A58920 /* google_marine_wasteTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = google_marine_wasteTests;
+			sourceTree = "<group>";
+		};
+		FF9F14092DC8F67700A58920 /* google_marine_wasteUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = google_marine_wasteUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FF9F13E92DC8F63D00A58920 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF80EC4C2DD48AB100875F3F /* FirebaseDatabase in Frameworks */,
+				FF80EC502DD48AB100875F3F /* FirebaseStorage in Frameworks */,
+				FF80EC4A2DD48AB100875F3F /* FirebaseAuth in Frameworks */,
+				FF80EC572DD49ACD00875F3F /* FirebaseAnalytics in Frameworks */,
+				FF80EC4E2DD48AB100875F3F /* FirebaseFirestore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF9F13F92DC8F67700A58920 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF9F14032DC8F67700A58920 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FF80EC552DD49ACD00875F3F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF9F13E32DC8F63D00A58920 = {
+			isa = PBXGroup;
+			children = (
+				FF9F13EE2DC8F63D00A58920 /* google_marine_waste */,
+				FF9F13FF2DC8F67700A58920 /* google_marine_wasteTests */,
+				FF9F14092DC8F67700A58920 /* google_marine_wasteUITests */,
+				FF80EC552DD49ACD00875F3F /* Frameworks */,
+				FF9F13ED2DC8F63D00A58920 /* Products */,
+				FF80EC582DD5B7F200875F3F /* test.txt */,
+			);
+			sourceTree = "<group>";
+		};
+		FF9F13ED2DC8F63D00A58920 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FF9F13EC2DC8F63D00A58920 /* google_marine_waste.app */,
+				FF9F13FC2DC8F67700A58920 /* google_marine_wasteTests.xctest */,
+				FF9F14062DC8F67700A58920 /* google_marine_wasteUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FF9F13EB2DC8F63D00A58920 /* google_marine_waste */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF9F14102DC8F67700A58920 /* Build configuration list for PBXNativeTarget "google_marine_waste" */;
+			buildPhases = (
+				FF9F13E82DC8F63D00A58920 /* Sources */,
+				FF9F13E92DC8F63D00A58920 /* Frameworks */,
+				FF9F13EA2DC8F63D00A58920 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FF9F13EE2DC8F63D00A58920 /* google_marine_waste */,
+			);
+			name = google_marine_waste;
+			packageProductDependencies = (
+				FF80EC492DD48AB100875F3F /* FirebaseAuth */,
+				FF80EC4B2DD48AB100875F3F /* FirebaseDatabase */,
+				FF80EC4D2DD48AB100875F3F /* FirebaseFirestore */,
+				FF80EC4F2DD48AB100875F3F /* FirebaseStorage */,
+				FF80EC562DD49ACD00875F3F /* FirebaseAnalytics */,
+			);
+			productName = google_marine_waste;
+			productReference = FF9F13EC2DC8F63D00A58920 /* google_marine_waste.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FF9F13FB2DC8F67700A58920 /* google_marine_wasteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF9F14132DC8F67700A58920 /* Build configuration list for PBXNativeTarget "google_marine_wasteTests" */;
+			buildPhases = (
+				FF9F13F82DC8F67700A58920 /* Sources */,
+				FF9F13F92DC8F67700A58920 /* Frameworks */,
+				FF9F13FA2DC8F67700A58920 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF9F13FE2DC8F67700A58920 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FF9F13FF2DC8F67700A58920 /* google_marine_wasteTests */,
+			);
+			name = google_marine_wasteTests;
+			packageProductDependencies = (
+			);
+			productName = google_marine_wasteTests;
+			productReference = FF9F13FC2DC8F67700A58920 /* google_marine_wasteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FF9F14052DC8F67700A58920 /* google_marine_wasteUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF9F14162DC8F67700A58920 /* Build configuration list for PBXNativeTarget "google_marine_wasteUITests" */;
+			buildPhases = (
+				FF9F14022DC8F67700A58920 /* Sources */,
+				FF9F14032DC8F67700A58920 /* Frameworks */,
+				FF9F14042DC8F67700A58920 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF9F14082DC8F67700A58920 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FF9F14092DC8F67700A58920 /* google_marine_wasteUITests */,
+			);
+			name = google_marine_wasteUITests;
+			packageProductDependencies = (
+			);
+			productName = google_marine_wasteUITests;
+			productReference = FF9F14062DC8F67700A58920 /* google_marine_wasteUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FF9F13E42DC8F63D00A58920 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					FF9F13EB2DC8F63D00A58920 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					FF9F13FB2DC8F67700A58920 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = FF9F13EB2DC8F63D00A58920;
+					};
+					FF9F14052DC8F67700A58920 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = FF9F13EB2DC8F63D00A58920;
+					};
+				};
+			};
+			buildConfigurationList = FF9F13E72DC8F63D00A58920 /* Build configuration list for PBXProject "google_marine_waste" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FF9F13E32DC8F63D00A58920;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FF80EC482DD48AB100875F3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = FF9F13ED2DC8F63D00A58920 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FF9F13EB2DC8F63D00A58920 /* google_marine_waste */,
+				FF9F13FB2DC8F67700A58920 /* google_marine_wasteTests */,
+				FF9F14052DC8F67700A58920 /* google_marine_wasteUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FF9F13EA2DC8F63D00A58920 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF9F13FA2DC8F67700A58920 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF9F14042DC8F67700A58920 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FF9F13E82DC8F63D00A58920 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF80EC592DD5B7FA00875F3F /* test.txt in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF9F13F82DC8F67700A58920 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF9F14022DC8F67700A58920 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FF9F13FE2DC8F67700A58920 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF9F13EB2DC8F63D00A58920 /* google_marine_waste */;
+			targetProxy = FF9F13FD2DC8F67700A58920 /* PBXContainerItemProxy */;
+		};
+		FF9F14082DC8F67700A58920 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF9F13EB2DC8F63D00A58920 /* google_marine_waste */;
+			targetProxy = FF9F14072DC8F67700A58920 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		FF9F140E2DC8F67700A58920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FF9F140F2DC8F67700A58920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FF9F14112DC8F67700A58920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"google_marine_waste/Preview Content\"";
+				DEVELOPMENT_TEAM = MGB4F5MAWY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "google-marine-waste-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com..google-marine-waste";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FF9F14122DC8F67700A58920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"google_marine_waste/Preview Content\"";
+				DEVELOPMENT_TEAM = MGB4F5MAWY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "google-marine-waste-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com..google-marine-waste";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FF9F14142DC8F67700A58920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com..google-marine-wasteTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/google_marine_waste.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/google_marine_waste";
+			};
+			name = Debug;
+		};
+		FF9F14152DC8F67700A58920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com..google-marine-wasteTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/google_marine_waste.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/google_marine_waste";
+			};
+			name = Release;
+		};
+		FF9F14172DC8F67700A58920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com..google-marine-wasteUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = google_marine_waste;
+			};
+			name = Debug;
+		};
+		FF9F14182DC8F67700A58920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com..google-marine-wasteUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = google_marine_waste;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FF9F13E72DC8F63D00A58920 /* Build configuration list for PBXProject "google_marine_waste" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF9F140E2DC8F67700A58920 /* Debug */,
+				FF9F140F2DC8F67700A58920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF9F14102DC8F67700A58920 /* Build configuration list for PBXNativeTarget "google_marine_waste" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF9F14112DC8F67700A58920 /* Debug */,
+				FF9F14122DC8F67700A58920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF9F14132DC8F67700A58920 /* Build configuration list for PBXNativeTarget "google_marine_wasteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF9F14142DC8F67700A58920 /* Debug */,
+				FF9F14152DC8F67700A58920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF9F14162DC8F67700A58920 /* Build configuration list for PBXNativeTarget "google_marine_wasteUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF9F14172DC8F67700A58920 /* Debug */,
+				FF9F14182DC8F67700A58920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FF80EC482DD48AB100875F3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FF80EC492DD48AB100875F3F /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF80EC482DD48AB100875F3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		FF80EC4B2DD48AB100875F3F /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF80EC482DD48AB100875F3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		FF80EC4D2DD48AB100875F3F /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF80EC482DD48AB100875F3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		FF80EC4F2DD48AB100875F3F /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF80EC482DD48AB100875F3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		FF80EC562DD49ACD00875F3F /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF80EC482DD48AB100875F3F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = FF9F13E42DC8F63D00A58920 /* Project object */;
+}

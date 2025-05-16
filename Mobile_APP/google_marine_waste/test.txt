@@ -1,0 +1,96 @@
+//
+//  LoginView.swift
+//  google_marine_waste
+//
+//  Created by jong on 2025/5/12.
+//
+
+import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
+
+struct LoginView: View {
+    @Binding var username: String
+    @Binding var isLoggedIn: Bool
+    @Environment(\.presentationMode) var presentationMode
+
+    @State private var inputUsername: String = ""
+    @State private var password: String = ""
+    @State private var loginFailed: Bool = false
+    @State private var errorMessage: String = ""
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("登入")
+                .font(.largeTitle)
+                .padding()
+
+            TextField("使用者名稱", text: $inputUsername)
+                .autocapitalization(.none)
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(10)
+                .padding(.horizontal)
+
+            SecureField("密碼", text: $password)
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(10)
+                .padding(.horizontal)
+
+            if loginFailed {
+                Text("登入失敗，請檢查帳號或密碼")
+                    .foregroundColor(.red)
+                    .padding(.horizontal)
+            }
+
+            Button(action: {
+                signIn()
+            }) {
+                Text("確認登入")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+            }
+
+            Spacer()
+        }
+        .padding()
+    }
+
+    func signIn() {
+        let db = Firestore.firestore()
+        
+        // 查詢用戶名對應的電子郵件
+        db.collection("users").document(inputUsername).getDocument { (document, error) in
+            if let document = document, document.exists {
+                let email = document.data()?["email"] as? String ?? ""
+                
+                // 使用查詢到的電子郵件登入
+                Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                    if let error = error {
+                        loginFailed = true
+                        errorMessage = error.localizedDescription
+                        print("登入失敗：\(errorMessage)")
+                    } else {
+                        username = inputUsername
+                        presentationMode.wrappedValue.dismiss() // 關閉登入頁面
+                        print("使用者已登入：\(username)")
+
+                        isLoggedIn = true
+                        loginFailed = false
+                        print("\(isLoggedIn)")
+                    }
+                }
+            } else {
+                loginFailed = true
+                errorMessage = "無法找到用戶名對應的電子郵件"
+                print("查詢失敗：\(errorMessage)")
+            }
+        }
+    }
+}
