@@ -11,17 +11,14 @@ from datetime import datetime
 import json
 from firebase_admin import credentials, initialize_app
 # ✅ 初始化 Firebase
-'''
+
 firebase_json = os.environ.get("FIREBASE_CREDENTIALS_JSON")
 if not firebase_json:
     raise ValueError("未設定 FIREBASE_CREDENTIALS_JSON 環境變數")
 
-cred_dict = json.loads(firebase_json)s
+cred_dict = json.loads(firebase_json)
 cred = credentials.Certificate(cred_dict)
 initialize_app(cred)
-'''
-cred = credentials.Certificate(r"D:\google_apac\v5_test\flask-backend\apac-2025-yuntech-firebase-adminsdk-fbsvc-ed07403664.json")
-firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # ✅ 初始化 Flask
@@ -419,5 +416,4 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    #app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080)
